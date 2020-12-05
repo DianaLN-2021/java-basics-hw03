@@ -7,12 +7,14 @@ public class Student {
 
   public Student(String name) {
     this.name = name;
-    count++;
-
+    Student.count++;
   }
 
   public static double getAvgRating() {
-    return ratingSum/count;
+    if(Student.count != 0) {
+      return Student.ratingSum/Student.count;
+    }
+    return 0;
   }
 
   public String getName() {
@@ -29,7 +31,7 @@ public class Student {
 
   public void setRating(int rating) {
     this.rating = rating;
-    ratingSum = ratingSum + this.rating;
+    Student.ratingSum = Student.ratingSum + this.rating;
   }
 
   public boolean betterStudent(Student student) {
@@ -39,11 +41,13 @@ public class Student {
   public void changeRating(int rating) {
     ratingSum = ratingSum - this.rating;
     this.rating = rating;
-    ratingSum = ratingSum + this.rating;
+    Student.ratingSum = Student.ratingSum + this.rating;
   }
 
   public static void removeStudent(Student student) {
-    // TODO remove student
+    Student.count--;
+    Student.ratingSum = Student.ratingSum - student.rating;
+    student = null;
   }
 
   @Override
